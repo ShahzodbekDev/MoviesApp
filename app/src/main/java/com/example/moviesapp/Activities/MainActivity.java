@@ -10,14 +10,20 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
 
+import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.moviesapp.Adapteres.FilmLlistAdapter;
 import com.example.moviesapp.Adapteres.SliderAdapters;
+import com.example.moviesapp.Domain.ListFilm;
 import com.example.moviesapp.Domain.SliderItems;
 import com.example.moviesapp.R;
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,9 +42,27 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        
+
         initView();
         banners();
+        sendRequest();
+    }
+
+    private void sendRequest() {
+        mRequestQueue = Volley.newRequestQueue(this);
+        loading1.setVisibility(View.VISIBLE);
+        mStringRequest = new StringRequest(Request.Method.GET, "https://moviesapi.ir/api/v1/movies?page=1", response -> {
+            Gson gson = new Gson();
+            ListFilm items = gson.fromJson(response, ListFilm.class);
+            adapterBestMovies = new FilmLlistAdapter(items);
+            recyclerViewBestMovies.setAdapter(adapterBestMovies);
+            loading1.setVisibility(View.GONE);
+
+        }, error -> {
+            loading1.setVisibility(View.GONE);
+            Log.i("TAG", "onErrorResponse: " + error.toString());
+        });
+        mRequestQueue.add(mStringRequest);
     }
 
     private void banners() {
@@ -115,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewCategory = findViewById(R.id.view3);
         recyclerViewCategory.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        loading1 = findViewById(R.id.progressBar1);
+        loading1 = findViewById(R.id.loading1);
         loading1 = findViewById(R.id.progressBar2);
         loading1 = findViewById(R.id.progressBar3);
     }

@@ -32,15 +32,17 @@ public class LogInActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(v -> {
             if (userEdt.getText().toString().isEmpty() || passEdt.getText().toString().isEmpty()) {
                 Toast.makeText(LogInActivity.this, "Plase enter your username and password", Toast.LENGTH_SHORT).show();
+
             } else if (userEdt.getText().toString().equals("admin") && passEdt.getText().toString().equals("admin")) {
                 startActivities(new Intent[]{new Intent(LogInActivity.this, MainActivity.class)});
-            } else {
+            } else if (userEdt.getText().toString().equals("admin") && passEdt.getText().toString().equals("admin")) {
+                startActivities(new Intent[]{new Intent(LogInActivity.this, MainActivity.class)});
+            }else {
+
                 Toast.makeText(LogInActivity.this, "Your username or password is not correct", Toast.LENGTH_SHORT).show();
             }
         });
 
 
     }
-
-
 }
