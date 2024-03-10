@@ -15,7 +15,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.moviesapp.Activities.DataActivity;
+import com.example.moviesapp.Activities.DatailActivity;
 import com.example.moviesapp.Domain.ListFilm;
 import com.example.moviesapp.R;
 
@@ -51,7 +51,7 @@ public class FilmLlistAdapter extends RecyclerView.Adapter<FilmLlistAdapter.View
 
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, DataActivity.class);
+                Intent intent = new Intent(context, DatailActivity.class);
                 intent.putExtra("id", items.getData().get(position).getId());
                 context.startActivity(intent);
             }

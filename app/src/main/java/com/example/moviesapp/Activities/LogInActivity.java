@@ -15,6 +15,7 @@ public class LogInActivity extends AppCompatActivity {
     private EditText userEdt, passEdt;
     private Button loginBtn;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,13 +34,9 @@ public class LogInActivity extends AppCompatActivity {
             if (userEdt.getText().toString().isEmpty() || passEdt.getText().toString().isEmpty()) {
                 Toast.makeText(LogInActivity.this, "Plase enter your username and password", Toast.LENGTH_SHORT).show();
 
-            } else if (userEdt.getText().toString().equals("admin") && passEdt.getText().toString().equals("admin")) {
+            } else  {
                 startActivities(new Intent[]{new Intent(LogInActivity.this, MainActivity.class)});
-            } else if (userEdt.getText().toString().equals("admin") && passEdt.getText().toString().equals("admin")) {
-                startActivities(new Intent[]{new Intent(LogInActivity.this, MainActivity.class)});
-            }else {
-
-                Toast.makeText(LogInActivity.this, "Your username or password is not correct", Toast.LENGTH_SHORT).show();
+                finish();
             }
         });
 

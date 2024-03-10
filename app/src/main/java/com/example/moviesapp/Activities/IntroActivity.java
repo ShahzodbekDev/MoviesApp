@@ -21,6 +21,7 @@ public class IntroActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 startActivities(new Intent[]{new Intent(IntroActivity.this, LogInActivity.class)});
+                finish();
             }
 
         }
